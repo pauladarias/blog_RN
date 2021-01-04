@@ -7,7 +7,6 @@ const IndexScreen = ( { navigation }) => {
   const { state, addBlogPost, deleteBlogPost }= useContext(BlogContext)
   return (
     <View>
-      <Button title="Add Post" onPress={() => addBlogPost()}/>
       <FlatList 
         data={state}
         keyExtractor={(blogPost) => blogPost.title}
@@ -30,6 +29,16 @@ const IndexScreen = ( { navigation }) => {
   )
 }
 
+IndexScreen.navigationOptions = ( {navigation }) => {
+  return {
+    headerRight: () => (
+      <TouchableOpacity onPress={() => navigation.navigate('Create')}>
+        <Feather style={styles.plus} name="plus" size={30} />
+      </TouchableOpacity>
+    ),
+  };
+}
+
 const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
@@ -44,6 +53,9 @@ const styles = StyleSheet.create({
   },
   icon: {
     fontSize: 24
+  },
+  plus: {
+    marginRight: 10
   }
 })
 
